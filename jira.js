@@ -51,7 +51,6 @@ module.exports = {
                     status: issue.fields.status.name
                   };
                 });
-                console.log("The story" + stories);
                 resolve(stories);
               }
             );
