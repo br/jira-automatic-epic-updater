@@ -2,7 +2,7 @@ const jsonfile = require("jsonfile");
 const express = require("express"),
   bodyParser = require("body-parser"),
   app = express(),
-  port = 3000;
+  port = 80;
 
 const jira = require("./jira");
 const { username, password, transitions, us_states } = require("./config");
@@ -26,10 +26,10 @@ app.post("/webhook", (req, res) => {
 
     let equals_one_inprogress = issue => {
       return (
-        issue.status === usStates.inProgress ||
-        issue.status === usStates.resolved ||
-        issue.status === usStates.merged ||
-        issue.status === usStates.deployed
+        issue.status === us_states.inProgress ||
+        issue.status === us_states.resolved ||
+        issue.status === us_states.merged ||
+        issue.status === us_states.deployed
       );
     };
 
@@ -57,8 +57,7 @@ app.post("/webhook", (req, res) => {
 
 // run the server
 const server = app.listen(port, () => {
-  const host = server.address().address;
   const port = server.address().port;
 
-  console.log("Server is listening at http://%s:%s", host, port);
+  console.log(`Server is listening on port ${port}`);
 });
