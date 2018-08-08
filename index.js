@@ -28,8 +28,10 @@ app.post("/webhook", (req, res) => {
       return (
         issue.status === us_states.inProgress ||
         issue.status === us_states.resolved ||
-        issue.status === us_states.merged ||
-        issue.status === us_states.deployed
+        issue.status === us_states.approved ||
+        issue.status === us_states.deployed ||
+        issue.status === us_states.staging ||
+        issue.status === us_states.blocked
       );
     };
 
