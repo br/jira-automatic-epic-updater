@@ -1,15 +1,47 @@
 # JIRA: Updating Epics Automatically When Linked Issues Are Updated
 
+A small web service based on NodeJS, which listens to User Story changes in JIRA and automatically updates Epics via the JIRA REST API.
+
 ## Configuration
 
+Replace the values with your Atlassian USERNAME, PASSWORD, ACCOUNT. You also have to edit the transition IDs and status names based on how you configured your JIRA workflow.
+
 ```javascript
+module.exports = {
+  username: "USERNAME", // Replace this, JIRA username
+  password: "PASSWORD", // Replace this, JIRA password
+  account: "ACCOUNT", // Replace this, Atlassian account name
+  // State Transititons
+  transitions: {
+    toDo: "41",
+    inProgress: "21",
+    done: "11",
+    wontdo: "31"
+  },
+  // User Story States
+  us_states: {
+    toDo: "To Do",
+    inProgress: "In Progress",
+    resolved: "In Review",
+    deployed: "Deployed to Dev",
+    staging: "Staging",
+    approved: "Approved",
+    done: "Done",
+    wontdo: "Won't do",
+    blocked: "Blocked"
+  }
+};
 ```
 
 ## Installation
 
+Install the node modules.
+
 ```javascript
 npm install
 ```
+
+Run the app
 
 ```javascript
 node index
@@ -17,7 +49,7 @@ node index
 
 ## documentation
 
-Find the full description in my Blog Post:
+Find the full description in my blog post:
 
 ## License
 
