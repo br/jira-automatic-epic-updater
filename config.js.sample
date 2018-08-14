@@ -2,6 +2,7 @@ module.exports = {
   username: "USERNAME", // Replace this, JIRA username
   password: "PASSWORD", // Replace this, JIRA password
   account: "ACCOUNT", // Replace this, Atlassian account name
+  project: "ABC" // JIRA project name
   // State Transititons
   transitions: {
     toDo: "41",
@@ -14,6 +15,7 @@ module.exports = {
     toDo: "To Do",
     inProgress: "In Progress",
     resolved: "In Review",
+    merged: "Merged",
     deployed: "Deployed to Dev",
     staging: "Staging",
     approved: "Approved",

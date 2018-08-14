@@ -4,13 +4,15 @@ A small web service based on NodeJS, which listens to User Story changes in JIRA
 
 ## Configuration
 
-Replace the values with your Atlassian USERNAME, PASSWORD, ACCOUNT. You also have to edit the transition IDs and status names based on how you configured your JIRA workflow.
+Replace the values in the configuration file with your Atlassian USERNAME, PASSWORD, ACCOUNT. You also have to edit the transition IDs and status names based on how you configured your JIRA workflow.
 
 ```javascript
 module.exports = {
   username: "USERNAME", // Replace this, JIRA username
   password: "PASSWORD", // Replace this, JIRA password
   account: "ACCOUNT", // Replace this, Atlassian account name
+  project: "ABC" // JIRA project name
+
   // State Transititons
   transitions: {
     toDo: "41",
@@ -23,6 +25,7 @@ module.exports = {
     toDo: "To Do",
     inProgress: "In Progress",
     resolved: "In Review",
+    merged: "Merged",
     deployed: "Deployed to Dev",
     staging: "Staging",
     approved: "Approved",
@@ -41,15 +44,17 @@ Install the node modules.
 npm install
 ```
 
+Rename "config.js.sample" to "config.js"
+
 Run the app
 
 ```javascript
 node index
 ```
 
-## documentation
+## Documentation
 
-Find the full description in my blog post:
+Find the full description in my blog post: http://blog.aichriedler.de/index.php/2018/08/14/jira-updating-epics-automatically-when-linked-issues-are-updated/
 
 ## License
 

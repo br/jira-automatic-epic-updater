@@ -36,7 +36,7 @@ module.exports = {
               data: {
                 // Provide additional data for the JIRA search. You can modify the JQL to search for whatever you want.
                 jql: jql_string
-                // jql: "project = MIR AND type=Story"
+                // jql: "project = ABC AND type=Story"
               }
             };
             // Make the request return the search results, passing the header information including the cookie.
@@ -47,7 +47,7 @@ module.exports = {
                 let stories = searchResult.issues.map(issue => {
                   return {
                     key: issue.key, // user story key
-                    epic: issue.fields.customfield_10008, // epic key e.g. MIR-100
+                    epic: issue.fields.customfield_10008, // epic key e.g. ABC-100
                     status: issue.fields.status.name
                   };
                 });
