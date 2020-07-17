@@ -8,7 +8,6 @@ const jira = require("./jira");
 const {
   username,
   password,
-  project,
   transitions,
   us_states
 } = require("./config");
@@ -26,42 +25,40 @@ app.post("/webhook", (req, res) => {
 
   // search all user sttories thtat are linked to epic of the updated user story
   jira
-    .search(`project = ${project} AND 'Epic Link'='${epic}'`)
+    .search(`'Epic Link'='${epic}'`)
     .then(stories => {
       let equals_every_todo = issue => {
         return issue.status === us_states.toDo;
       };
 
-      let equals_one_inprogress = issue => {
-        return (
-          issue.status === us_states.inProgress ||
-          issue.status === us_states.resolved ||
-          issue.status === us_states.merged ||
-          issue.status === us_states.approved ||
-          issue.status === us_states.deployed ||
-          issue.status === us_states.staging ||
-          issue.status === us_states.blocked
-        );
+      let equals_every_closed = issue => {
+        return issue.status === us_states.closed;
       };
 
       let equals_every_done = issue => {
-        return issue.status === us_states.done;
+        return (
+          issue.status === us_states.done ||
+          issue.status === us_states.closed
+        );
       };
 
       if (stories.every(equals_every_todo) === true) {
         // update epic to "To Do" if all user story is in "To Do"
         console.log(`Updating ${epic} via transition ${transitions.toDo}`);
         jira.updateEpic(epic, transitions.toDo);
-      } else if (stories.some(equals_one_inprogress) === true) {
-        // update epic to "In Progress" if at least one user story is in "In Progress"
-        console.log(
-          `Updating ${epic} via transition ${transitions.inProgress}`
-        );
-        jira.updateEpic(epic, transitions.inProgress);
+      }  else if (stories.every(equals_every_closed) === true) {
+        // update epic to "Closed" if all user story is in "Closed"
+        console.log(`Updating ${epic} via transition ${transitions.closed}`);
+        jira.updateEpic(epic, transitions.closed);
       } else if (stories.every(equals_every_done) === true) {
-        // update epic to "Done" if all user stories are in "Done"
+        // update epic to "Done" if all user stories are in "Done" or "Closed"
+        // the comparison can't differentiate from all closed so should be checked
+        // after the specific check for all closed
         console.log(`Updating ${epic} via transition ${transitions.done}`);
         jira.updateEpic(epic, transitions.done);
+      } else {
+        console.log(`Updating ${epic} via transition ${transitions.inProgress}`);
+        jira.updateEpic(epic, transitions.inProgress);
       }
     });
 

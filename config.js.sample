@@ -1,26 +1,18 @@
 module.exports = {
   username: "USERNAME", // Replace this, JIRA username
   password: "PASSWORD", // Replace this, JIRA password
-  account: "ACCOUNT", // Replace this, Atlassian account name
-  project: "ABC", // JIRA project name
+  account: "statmilk", // Replace this, Atlassian account name
   // State Transititons
   transitions: {
-    toDo: "41",
-    inProgress: "21",
-    done: "11",
-    wontdo: "31"
+    toDo: "11",
+    inProgress: "101",
+    done: "31",
+    closed: "111"
   },
   // User Story States
   us_states: {
     toDo: "To Do",
-    inProgress: "In Progress",
-    resolved: "In Review",
-    merged: "Merged",
-    deployed: "Deployed to Dev",
-    staging: "Staging",
-    approved: "Approved",
     done: "Done",
-    wontdo: "Won't do",
-    blocked: "Blocked"
+    closed: "Closed"
   }
 };
