@@ -1,7 +1,7 @@
 module.exports = {
-  username: "USERNAME", // Replace this, JIRA username
-  password: "PASSWORD", // Replace this, JIRA password
-  account: "statmilk", // Replace this, Atlassian account name
+  username: process.env.JIRA_USERNAME,
+  password: process.env.JIRA_PASSWORD,
+  account: "statmilk",
   // State Transititons
   transitions: {
     toDo: "11",
