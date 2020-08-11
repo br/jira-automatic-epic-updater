@@ -1,4 +1,4 @@
 node_modules
 samples
-config.js
 test.js
+docker-compose.yml
