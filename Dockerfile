@@ -4,7 +4,8 @@ WORKDIR /app
 
 COPY package*.json /app/
 
-RUN npm install
+RUN apk add --no-cache ca-certificates \
+    && npm install
 
 COPY . /app/
 
