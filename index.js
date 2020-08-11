@@ -14,6 +14,12 @@ const {
 
 app.use(bodyParser.json());
 
+app.get("/up", (req, res) => {
+  res.status(200).json({
+    status: "ok"
+  });
+});
+
 // webhook is triggered if user story is updated
 app.post("/webhook", (req, res) => {
   let body = req.body;
